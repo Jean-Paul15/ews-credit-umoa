@@ -5,7 +5,9 @@
 FROM apache/spark:3.5.9-python3
 
 USER root
-RUN pip install --no-cache-dir pytest==8.3.3
+# numpy : requis par pyspark.ml (absent de l'image officielle, contrairement
+# a pandas/pyarrow qui n'y sont pas necessaires cote cluster).
+RUN pip install --no-cache-dir pytest==8.3.3 numpy==1.26.4
 RUN mkdir -p /opt/spark/work-dir && chown spark:spark /opt/spark/work-dir
 USER spark
 

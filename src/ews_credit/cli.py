@@ -33,9 +33,9 @@ def _commande_portfolio(args: argparse.Namespace) -> None:
 
 
 def _commande_events(args: argparse.Namespace) -> None:
-    clients = pd.read_csv(args.source / "clients.csv")
-    credits = pd.read_csv(args.source / "credits.csv")
-    panel = pd.read_csv(args.source / "panel_mensuel.csv", parse_dates=["date_releve"])
+    clients = pd.read_csv(args.source / "clients.csv", encoding="utf-8")
+    credits = pd.read_csv(args.source / "credits.csv", encoding="utf-8")
+    panel = pd.read_csv(args.source / "panel_mensuel.csv", parse_dates=["date_releve"], encoding="utf-8")
 
     events_df = generer_evenements(clients, credits, panel, seed=args.seed)
     nb_partitions = ecrire_evenements_partitionnes(events_df, args.sortie)
