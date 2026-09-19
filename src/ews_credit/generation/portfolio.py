@@ -5,9 +5,10 @@ from dataclasses import dataclass
 import pandas as pd
 
 from ews_credit import config
-from ews_credit.generation.behavior import calculer_labels_bascule_defaut, generer_panel_mensuel
+from ews_credit.generation.behavior import generer_panel_mensuel
 from ews_credit.generation.clients import generer_clients
 from ews_credit.generation.credits import generer_credits
+from ews_credit.generation.labels import calculer_labels_bascule_defaut
 
 
 @dataclass(frozen=True)
