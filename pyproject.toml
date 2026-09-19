@@ -10,6 +10,7 @@ requires-python = ">=3.11"
 dependencies = [
     "pandas>=2.3",
     "numpy>=2.0",
+    "pyarrow>=17.0",
 ]
 
 [project.optional-dependencies]
@@ -19,6 +20,7 @@ dev = ["pytest>=8.0"]
 spark = ["pyspark==3.5.9"]
 api = ["fastapi>=0.115", "uvicorn>=0.32"]
 dashboard = ["streamlit>=1.38", "requests>=2.32"]
+notebook = ["jupyter>=1.0", "nbconvert>=7.16", "matplotlib>=3.9", "scikit-learn>=1.5"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

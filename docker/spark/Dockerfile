@@ -5,9 +5,9 @@
 FROM apache/spark:3.5.9-python3
 
 USER root
-# numpy : requis par pyspark.ml (absent de l'image officielle, contrairement
-# a pandas/pyarrow qui n'y sont pas necessaires cote cluster).
-RUN pip install --no-cache-dir pytest==8.3.3 numpy==1.26.4
+# numpy : requis par pyspark.ml. pandas/pyarrow : requis par les fonctions
+# vectorisees (ex. vector_to_array) utilisees pour exporter les predictions.
+RUN pip install --no-cache-dir pytest==8.3.3 numpy==1.26.4 pandas==2.2.3 pyarrow==17.0.0
 RUN mkdir -p /opt/spark/work-dir && chown spark:spark /opt/spark/work-dir
 USER spark
 

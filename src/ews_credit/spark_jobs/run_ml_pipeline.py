@@ -9,12 +9,17 @@ Exemple (depuis le conteneur spark-master) :
 import argparse
 import json
 
+from pyspark.ml.functions import vector_to_array
 from pyspark.sql import SparkSession
 
 from ews_credit.spark_jobs.evaluate_model import evaluer
 from ews_credit.spark_jobs.sql_analysis import analyser_risque_par_pays_et_mois
 from ews_credit.spark_jobs.train_model import entrainer_et_predire
-from ews_credit.spark_jobs.training_dataset import ajouter_poids_de_classe, construire_dataset_entrainement
+from ews_credit.spark_jobs.training_dataset import (
+    COLONNE_LABEL,
+    ajouter_poids_de_classe,
+    construire_dataset_entrainement,
+)
 
 
 def executer(racine_hdfs: str) -> None:
@@ -38,6 +43,12 @@ def executer(racine_hdfs: str) -> None:
 
         modele.write().overwrite().save(f"{racine_hdfs}/modele_ews")
         spark.createDataFrame([metriques.as_dict()]).write.mode("overwrite").json(f"{racine_hdfs}/metriques_modele")
+
+        # Echantillon des predictions de test (proba + label reel) : sert a tracer
+        # une courbe ROC et une matrice de confusion dans le notebook d'analyse.
+        predictions.withColumn("proba_positif", vector_to_array("probability")[1]).select(
+            "credit_id", "annee_mois", COLONNE_LABEL, "proba_positif", "prediction"
+        ).write.mode("overwrite").parquet(f"{racine_hdfs}/predictions_test")
     finally:
         spark.stop()
 
