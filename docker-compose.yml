@@ -5,6 +5,9 @@ services:
     environment:
       - CLUSTER_NAME=ews-credit
       - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+      # Cluster de demo mono-utilisateur (pas de multi-tenant a isoler) :
+      # simplifie l'ecriture depuis le conteneur Spark sans gestion d'ACL HDFS.
+      - HDFS_CONF_dfs_permissions_enabled=false
     ports:
       - "9870:9870"
     volumes:
