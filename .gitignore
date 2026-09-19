@@ -1,0 +1,31 @@
+# Donnees volumineuses (regenerables via le CLI, non versionnees)
+data/raw/
+data/synthetic/
+data/events/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+
+# Spark / Hadoop
+spark-warehouse/
+metastore_db/
+*.crc
+_SUCCESS
+
+# LaTeX
+docs/**/*.aux
+docs/**/*.log
+docs/**/*.out
+docs/**/*.toc
+docs/**/*.synctex.gz
+
+# Environnement local
+.env
+.idea/
+.vscode/
