@@ -32,5 +32,10 @@ def afficher() -> None:
         tableau,
         use_container_width=True,
         hide_index=True,
-        column_config={"Score": st.column_config.ProgressColumn("Score", min_value=0.0, max_value=1.0)},
+        column_config={
+            "Crédit": st.column_config.TextColumn("Crédit", width="medium"),
+            "Pays": st.column_config.TextColumn("Pays", width="medium"),
+            "Score": st.column_config.ProgressColumn("Score", min_value=0.0, max_value=1.0, width="medium"),
+            "Solde restant dû (FCFA)": st.column_config.NumberColumn("Solde restant dû (FCFA)", format="%.0f"),
+        },
     )
