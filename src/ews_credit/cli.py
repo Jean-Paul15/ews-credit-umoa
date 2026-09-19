@@ -24,12 +24,12 @@ def _commande_portfolio(args: argparse.Namespace) -> None:
     portefeuille.panel_mensuel.to_csv(args.sortie / "panel_mensuel.csv", index=False)
     portefeuille.labels.to_csv(args.sortie / "labels.csv", index=False)
 
-    print(f"Clients          : {len(portefeuille.clients):,}")
-    print(f"Credits          : {len(portefeuille.credits):,}")
-    print(f"Lignes panel     : {len(portefeuille.panel_mensuel):,}")
-    print(f"Lignes labels    : {len(portefeuille.labels):,}")
-    print(f"Taux bascule 3m  : {portefeuille.labels['bascule_defaut_3m'].mean():.2%}")
-    print(f"Sortie ecrite dans : {args.sortie}")
+    print(f"Clients            : {len(portefeuille.clients):,}")
+    print(f"Crédits            : {len(portefeuille.credits):,}")
+    print(f"Lignes panel       : {len(portefeuille.panel_mensuel):,}")
+    print(f"Lignes labels      : {len(portefeuille.labels):,}")
+    print(f"Taux bascule 3m    : {portefeuille.labels['bascule_defaut_3m'].mean():.2%}")
+    print(f"Sortie écrite dans : {args.sortie}")
 
 
 def _commande_events(args: argparse.Namespace) -> None:
@@ -40,22 +40,22 @@ def _commande_events(args: argparse.Namespace) -> None:
     events_df = generer_evenements(clients, credits, panel, seed=args.seed)
     nb_partitions = ecrire_evenements_partitionnes(events_df, args.sortie)
 
-    print(f"Evenements generes : {len(events_df):,}")
-    print(f"Partitions ecrites  : {nb_partitions}")
-    print(f"Sortie ecrite dans  : {args.sortie}")
+    print(f"Événements générés : {len(events_df):,}")
+    print(f"Partitions écrites : {nb_partitions}")
+    print(f"Sortie écrite dans : {args.sortie}")
 
 
 def _construire_parseur() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Outils de generation EWS-Credit UMOA.")
+    parser = argparse.ArgumentParser(description="Outils de génération EWS-Credit UMOA.")
     sous_commandes = parser.add_subparsers(dest="commande", required=True)
 
-    portfolio = sous_commandes.add_parser("portfolio", help="Genere le portefeuille synthetique (verite terrain).")
+    portfolio = sous_commandes.add_parser("portfolio", help="Génère le portefeuille synthétique (vérité terrain).")
     portfolio.add_argument("--n-clients", type=int, default=15_000)
     portfolio.add_argument("--seed", type=int, default=config.SEED)
     portfolio.add_argument("--sortie", type=Path, default=DOSSIER_SYNTHETIC_PAR_DEFAUT)
     portfolio.set_defaults(func=_commande_portfolio)
 
-    events = sous_commandes.add_parser("events", help="Genere le flux d'evenements bruts depuis le portefeuille.")
+    events = sous_commandes.add_parser("events", help="Génère le flux d'événements bruts depuis le portefeuille.")
     events.add_argument("--source", type=Path, default=DOSSIER_SYNTHETIC_PAR_DEFAUT)
     events.add_argument("--sortie", type=Path, default=DOSSIER_EVENTS_PAR_DEFAUT)
     events.add_argument("--seed", type=int, default=config.SEED)

@@ -32,14 +32,14 @@ def executer(racine_hdfs: str) -> None:
 
         analyse = analyser_risque_par_pays_et_mois(spark, features, credits, clients)
         analyse.write.mode("overwrite").parquet(f"{racine_hdfs}/analyse_risque_pays")
-        print(f"Analyse Spark SQL ecrite : {analyse.count():,} lignes (pays x mois)")
+        print(f"Analyse Spark SQL écrite : {analyse.count():,} lignes (pays x mois)")
 
         dataset = ajouter_poids_de_classe(construire_dataset_entrainement(features, labels))
         modele, predictions, test = entrainer_et_predire(dataset)
         metriques = evaluer(predictions)
 
-        print(f"Dataset d'entrainement : {dataset.count():,} lignes, test : {test.count():,} lignes")
-        print("Metriques :", json.dumps(metriques.as_dict(), indent=2))
+        print(f"Jeu d'entraînement : {dataset.count():,} lignes, test : {test.count():,} lignes")
+        print("Métriques :", json.dumps(metriques.as_dict(), indent=2))
 
         modele.write().overwrite().save(f"{racine_hdfs}/modele_ews")
         spark.createDataFrame([metriques.as_dict()]).write.mode("overwrite").json(f"{racine_hdfs}/metriques_modele")

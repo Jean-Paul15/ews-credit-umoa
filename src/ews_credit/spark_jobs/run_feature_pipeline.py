@@ -22,7 +22,7 @@ def executer(entree: str, sortie: str) -> None:
         events = spark.read.schema(SCHEMA_EVENEMENTS).option("basePath", entree).json(f"{entree}/*/*/*/*.jsonl")
         features = construire_features_comportementales(events)
         features.write.mode("overwrite").partitionBy("annee_mois").parquet(sortie)
-        print(f"Lignes de features ecrites : {features.count():,}")
+        print(f"Lignes de features écrites : {features.count():,}")
     finally:
         spark.stop()
 

@@ -13,6 +13,7 @@ services:
     volumes:
       - namenode-data:/hadoop/dfs/name
       - ./data/raw/events:/staging/events:ro
+      - ./data/synthetic:/staging/synthetic:ro
     mem_limit: 768m
 
   datanode:
