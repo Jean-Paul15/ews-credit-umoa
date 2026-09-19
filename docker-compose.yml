@@ -25,25 +25,31 @@ services:
     mem_limit: 768m
 
   spark-master:
-    image: bitnami/spark:3.5
+    build: ./docker/spark
     container_name: ews-spark-master
+    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.master.Master", "--host", "spark-master", "--port", "7077", "--webui-port", "8080"]
     environment:
-      - SPARK_MODE=master
+      - PYTHONPATH=/opt/spark/work-dir/src
+    volumes:
+      - ./src:/opt/spark/work-dir/src:ro
+      - ./tests:/opt/spark/work-dir/tests:ro
     ports:
       - "8080:8080"
       - "7077:7077"
     mem_limit: 1g
 
   spark-worker:
-    image: bitnami/spark:3.5
+    build: ./docker/spark
     container_name: ews-spark-worker
+    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.worker.Worker", "spark://spark-master:7077"]
     depends_on:
       - spark-master
     environment:
-      - SPARK_MODE=worker
-      - SPARK_MASTER_URL=spark://spark-master:7077
       - SPARK_WORKER_MEMORY=2g
       - SPARK_WORKER_CORES=2
+      - PYTHONPATH=/opt/spark/work-dir/src
+    volumes:
+      - ./src:/opt/spark/work-dir/src:ro
     mem_limit: 2200m
 
 volumes:
