@@ -55,6 +55,30 @@ services:
       - ./src:/opt/spark/work-dir/src:ro
     mem_limit: 2200m
 
+  api:
+    build:
+      context: .
+      dockerfile: docker/api/Dockerfile
+    container_name: ews-api
+    volumes:
+      - ./data/synthetic:/data/synthetic:ro
+    ports:
+      - "8000:8000"
+    mem_limit: 512m
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: docker/dashboard/Dockerfile
+    container_name: ews-dashboard
+    depends_on:
+      - api
+    environment:
+      - EWS_API_URL=http://api:8000
+    ports:
+      - "8501:8501"
+    mem_limit: 512m
+
 volumes:
   namenode-data:
   datanode-data:
