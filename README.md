@@ -121,7 +121,6 @@ src/ews_credit/
 └── dashboard/        # Streamlit : consomme l'API (jamais les fichiers directement)
 
 docker/                # Dockerfiles (spark, api, dashboard) + scripts d'ingestion/execution
-docs/fiche_tp/          # support de presentation (LaTeX)
 notebooks/              # analyse exploratoire, autonome (ne depend pas de Spark/API actifs)
 tests/                  # domain/ (pytest local) + spark_jobs/ (pytest en conteneur)
 ```

@@ -18,12 +18,10 @@ metastore_db/
 *.crc
 _SUCCESS
 
-# LaTeX
-docs/**/*.aux
-docs/**/*.log
-docs/**/*.out
-docs/**/*.toc
-docs/**/*.synctex.gz
+# Fiche de TP : support de presentation academique (contexte "Exposé 8",
+# "Master professionnel"), hors du perimetre d'un repo portfolio public —
+# gardee localement pour la soutenance, jamais poussee sur GitHub.
+docs/fiche_tp/
 
 # Environnement local
 .env
