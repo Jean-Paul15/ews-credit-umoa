@@ -1,0 +1,32 @@
+name: Tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  tests-domain:
+    name: Tests domaine (pytest local)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -e ".[dev]"
+      - run: pytest tests/domain tests/generation -v
+
+  tests-spark:
+    name: Tests Spark (en conteneur)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t ews-spark-test -f docker/spark/Dockerfile docker/spark
+      - run: |
+          docker run --rm \
+            -v "${{ github.workspace }}/src:/opt/spark/work-dir/src:ro" \
+            -v "${{ github.workspace }}/tests:/opt/spark/work-dir/tests:ro" \
+            -w /opt/spark/work-dir \
+            ews-spark-test \
+            python3 -m pytest tests/spark_jobs -v

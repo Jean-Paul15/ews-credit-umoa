@@ -19,10 +19,16 @@ metastore_db/
 *.crc
 _SUCCESS
 
-# Fiche de TP : support de presentation academique (contexte "Exposé 8",
-# "Master professionnel"), hors du perimetre d'un repo portfolio public —
-# gardee localement pour la soutenance, jamais poussee sur GitHub.
+# Fiche de TP et supports de soutenance : contexte academique explicite
+# ("Exposé 8", "Master professionnel"), hors du perimetre d'un repo
+# portfolio public — gardes localement, jamais pousses sur GitHub.
 docs/fiche_tp/
+presentation/
+
+# Outillage local (cartographie de code, non lie au projet lui-meme)
+.claude/
+graphify-out/
+/CLAUDE.md
 
 # Environnement local
 .env

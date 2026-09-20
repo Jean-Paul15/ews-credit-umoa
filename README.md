@@ -1,5 +1,10 @@
 # EWS-Credit UMOA
 
+[![Tests](https://github.com/Jean-Paul15/ews-credit-umoa/actions/workflows/tests.yml/badge.svg)](https://github.com/Jean-Paul15/ews-credit-umoa/actions/workflows/tests.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](pyproject.toml)
+[![Spark 3.5](https://img.shields.io/badge/Spark-3.5-orange.svg)](docker/spark/Dockerfile)
+
 **Système d'alerte précoce (Early Warning System) sur la dégradation d'un
 portefeuille de crédits**, conforme aux exigences de provisionnement IFRS 9,
 avec une chaîne de traitement distribuée complète : événements bruts → HDFS

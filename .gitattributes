@@ -2,3 +2,8 @@
 *.png binary
 *.jpg binary
 *.pdf binary
+
+# Le notebook contient des sorties (images base64) qui dominent
+# artificiellement les statistiques de langage GitHub — le projet est
+# a 95% Python, pas Jupyter.
+*.ipynb linguist-generated=true
