@@ -1,7 +1,7 @@
 # EWS-Credit UMOA
 
 [![Tests](https://github.com/Jean-Paul15/ews-credit-umoa/actions/workflows/tests.yml/badge.svg)](https://github.com/Jean-Paul15/ews-credit-umoa/actions/workflows/tests.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](pyproject.toml)
 [![Spark 3.5](https://img.shields.io/badge/Spark-3.5-orange.svg)](docker/spark/Dockerfile)
 
@@ -148,4 +148,4 @@ génération / traitement distribué / service applicatif.
 
 ## Licence
 
-MIT — voir [`LICENSE`](LICENSE).
+CC BY-NC-ND 4.0 — voir [`LICENSE`](LICENSE).
